@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SSO_Authentification</title>
+<meta charset="UTF-8">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="825882091054-50ikqp8r4185qotggndh5p2scddr8kjr.apps.googleusercontent.com">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.12.0/bootstrap-social.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+</head>
+
+<body>
+
+  <a id="google-button" class="btn btn-block  btn-google ">
+    <i class="fa fa-google" ></i> Sign in with google
+  </a>
+
+  <a id="facebook-button" class="btn btn-block  btn-facebook">
+    <i class="fa fa-facebook"></i> Sign in with Facebook
+  </a>
+
+  <a id="github-button" class="btn btn-block btn-github ">
+    <i class="fa fa-github"></i> Sign in with Github
+  </a>
+
+  <a id="linkedin-button" class="btn btn-block btn-linkedin">
+    <i class="fa fa-linkedin"></i> Sign in with Linkedin
+  </a>
+<script>
+
+  //facebook
+  $('#facebook-button').on('click', function() {
+        OAuth.initialize('Ey639YkKvsSmtGPyUQnoNUBtW6A');
+        OAuth.popup('facebook').then(facebook => {
+          console.log('facebook:',facebook);
+          facebook.me().then(data => {
+            console.log('me data:', data);
+            let facebook_info2 = `
+                <h3>Facebook account : ${data.name}</h3>
+                <ul class="list-group">
+                  <li class="list-group-item">Avatar: ${data.avatar}</li>
+                  <li class="list-group-item">Bio: ${data.bio}</li>
+                  <li class="list-group-item">Company: ${data.company}</li>
+                  <li class="list-group-item">Email: ${data.email}</li>
+                  <li class="list-group-item">ID: ${data.id}</li>
+                  <li class="list-group-item">Location: ${data.location}</li>
+                  <li class="list-group-item">Name: ${data.name}</li> 
+                  <li class="list-group-item">Company: ${data.company}</li> 
+                </ul>
+              `;
+              document.getElementById('facebook_info').innerHTML = facebook_info2;
+          })
+          facebook.get('/v2.5/me?fields=name,first_name,last_name,email,gender,location,locale,work,languages,birthday,relationship_status,hometown,picture').then(data => {
+            console.log('self data:', data);
+          })
+        });
+      })
+
+
+  
+
+  $('#google-button').on('click', function() {
+        OAuth.initialize('Ey639YkKvsSmtGPyUQnoNUBtW6A');
+        OAuth.popup('google').then(google => {
+          console.log('google:',google);
+          google.me().then(data => {
+            console.log('me data:', data);
+            alert('Google says your email is:' + data.email + ".\nView browser 'Console Log' for more details");
+          });
+          google.get('/plus/v1/people/me').then(data => {
+            console.log('self data:', data);
+            console.log(data.name);
+          })
+        });
+      })
+
+      // github
+
+      
+      $('#github-button').on('click', function() {
+        OAuth.initialize('Ey639YkKvsSmtGPyUQnoNUBtW6A');
+        OAuth.popup('github').then(github => {
+          console.log('github:', github);
+          github.me().then(data => {
+            console.log('me data:', data);
+            let github_info2 = `
+                <h3>GitHub account : ${data.alias}</h3>
+                <ul class="list-group">
+                  <li class="list-group-item">Avatar: ${data.avatar}</li>
+                  <li class="list-group-item">Bio: ${data.bio}</li>
+                  <li class="list-group-item">Company: ${data.company}</li>
+                  <li class="list-group-item">Email: ${data.email}</li>
+                  <li class="list-group-item">ID: ${data.id}</li>
+                  <li class="list-group-item">Location: ${data.location}</li>
+                  <li class="list-group-item">Name: ${data.name}</li>
+                </ul>
+              `;
+              document.getElementById('github_info').innerHTML = github_info2;
+      });
+
+          github.get('/user').then(data => {
+            console.log('self data:', data);
+          })
+        });
+      })
+
+      //linkedin
+
+      $('#linkedin-button').on('click', function() {
+        OAuth.initialize('Ey639YkKvsSmtGPyUQnoNUBtW6A');
+        OAuth.popup('linkedin2').then(linkedin => {
+          console.log('linkedin:',linkedin);
+          linkedin.me().then(data => {
+            console.log('me data:', data);
+            let linkedin_info2 = `
+                <h3>Linkedin account : ${data.name}</h3>
+                <ul class="list-group">
+                  <li class="list-group-item">Avatar: ${data.avatar}</li>
+                  <li class="list-group-item">Bio: ${data.bio}</li>
+                  <li class="list-group-item">Company: ${data.company}</li>
+                  <li class="list-group-item">Email: ${data.email}</li>
+                  <li class="list-group-item">ID: ${data.id}</li>
+                  <li class="list-group-item">Location: ${data.location}</li>
+                  <li class="list-group-item">Name: ${data.name}</li>
+                </ul>
+              `;
+              document.getElementById('linkedin_info').innerHTML = linkedin_info2;
+          })
+          linkedin.get('/v2/me').then(data => {
+            console.log('self data:', data);
+          })
+        });
+      })
+
+      
+
+</script>
+
+<div id="status">
+</div>
+
+<div id="github_info">
+</div>
+
+<div id="facebook_info">
+</div>
+
+<div id="linkedin_info">
+</div>
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+</body>
+</html>

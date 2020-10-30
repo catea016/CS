@@ -1,0 +1,18 @@
+﻿User creation process: 
+
+ - User enters a password.
+ - A random salt value is generated for the user.
+ - The salt value is added to the password and a final string is generated.
+ - The hash for the final string is calculated.
+ - The hash and the salt is stored in the database for this user.
+ 
+ 
+ User tries to log in: 
+
+ - User enters his user ID.
+ - The user is used to retrieve the users password hash and salt stored in the database.
+ - The user enters his password.
+ - The retrieved salt is added to this password and a final string is generated.
+ - The hash for the final string is calculated.
+ - This calculated hash is compared with the hash value retrieved from the database.
+ - If it matches the password is correct otherwise not.

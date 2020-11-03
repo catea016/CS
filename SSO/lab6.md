@@ -19,9 +19,9 @@ application should output on screen data that it has received from the identity 
 user’s name, age, gender, email etc.).
 
 To summarize, my application:
-• Offer user authentication via SSO using at 4 identity providers (Facebook, Gmail, GitHub, Linkedin);
-• Configure SSO integration to get as much as possible data about the end-user;
-• Output all data which was provided by the identity providers
+ - Offer user authentication via SSO using at 4 identity providers (Facebook, Gmail, GitHub, Linkedin);
+ - Configure SSO integration to get as much as possible data about the end-user;
+ -  Output all data which was provided by the identity providers
 
 ## Technologies
 
